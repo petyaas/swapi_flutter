@@ -8,7 +8,7 @@ part 'planets.g.dart';
 
 @Freezed()
 class PlanetsModel with _$PlanetsModel {
-  const factory PeopleModel({
+  const factory PlanetsModel({
     @Default("") String climate,
     @Default("") String created,
     @Default("") String diameter,
