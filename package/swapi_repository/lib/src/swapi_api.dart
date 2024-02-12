@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'dart:developer' as developer;
-class ProfileApi {
+class SwApi {
   String endPoint = '';
   static BaseOptions options = BaseOptions(
       baseUrl: 'https://swapi.dev/api/',
@@ -18,15 +18,19 @@ class ProfileApi {
       },
       );
 
-  Future<Response> getProfile(
-    String token,
+  Future<Response> searchPeople(
+      String search,
   ) async {
     Response? _response;
+    _response = await _getData(endPoint+'people?${search}', '', options);
 
-    // Data = {
-    //   'email': email,
-    // };
-    _response = await _getData(endPoint, token, options);
+    return _response;
+  }
+  Future<Response> searchstarships(
+      String search,
+  ) async {
+    Response? _response;
+    _response = await _getData(endPoint+'starships?${search}', '', options);
 
     return _response;
   }
