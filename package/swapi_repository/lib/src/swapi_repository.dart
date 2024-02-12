@@ -31,5 +31,41 @@ class SwapiRepository {
         return PeopleModel.fromJson(_response.data['results']);
   }
 
+  Future<StarshipModel> searchStarship({required String searchText}) async {
+    Response _response;
+
+      _response = await _swApi.searchstarships(searchText);
+      if (_response.statusCode != 200) {
+        throw SwapiRequestFailure();
+      }
+
+      if(_response.data['results']==null){
+        throw SwapiNotFoundFailure();
+      }
+      if(_response.data['results']==[]){
+        throw SwapiNotFoundFailure();
+      }
+
+        return StarshipModel.fromJson(_response.data['results']);
+  }
+
+  Future<PlanetsModel> searchPlanet({required String searchText}) async {
+    Response _response;
+
+      _response = await _swApi.searchstarships(searchText);
+      if (_response.statusCode != 200) {
+        throw SwapiRequestFailure();
+      }
+
+      if(_response.data['results']==null){
+        throw SwapiNotFoundFailure();
+      }
+      if(_response.data['results']==[]){
+        throw SwapiNotFoundFailure();
+      }
+
+        return PlanetsModel.fromJson(_response.data['results']);
+  }
+
 
 }

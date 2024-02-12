@@ -22,7 +22,7 @@ class SwApi {
       String search,
   ) async {
     Response? _response;
-    _response = await _getData(endPoint+'people?${search}', '', options);
+    _response = await _getData(endPoint+'people?${search}',options:options);
 
     return _response;
   }
@@ -30,7 +30,7 @@ class SwApi {
       String search,
   ) async {
     Response? _response;
-    _response = await _getData(endPoint+'starships?${search}', '', options);
+    _response = await _getData(endPoint+'starships?${search}',options: options,);
 
     return _response;
   }
@@ -38,7 +38,7 @@ class SwApi {
 }
 
 
-Future<Response> _getData(String endpoint, String token,BaseOptions options ) async {
+Future<Response> _getData(String endpoint, {String? token, BaseOptions? options,Map<String, dynamic>? queryParameters,CancelToken? cancelToken}) async {
   var dio = Dio(options);
   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
     client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
@@ -46,36 +46,19 @@ Future<Response> _getData(String endpoint, String token,BaseOptions options ) as
   };
 
   Response qwq;
-  if (token == '') {
-    // ShowSnackBar(ApiLinks.host+endpoint, 'GET');
     try {
       qwq = await dio.get(
         endpoint,
+        queryParameters: queryParameters,
+        cancelToken: cancelToken,
       );
     } on DioError catch (e) {
       developer.log(endpoint);
       developer.log(e.toString());
-      qwq = e.response!;
+      throw "something went wrong";
+      // qwq = e.response!;
     }
 
     return qwq;
-  } else {
-    try {
-      qwq = await dio.get(
-        endpoint,
-        options: Options(
-          headers: {
-            "Authorization": "Bearer ${token}",
-          },
-        ),
-      );
-    } on DioError catch (e) {
-      developer.log(endpoint);
-      developer.log(e.toString());
-      qwq = e.response!;
-    }
-
-    return qwq;
-  }
 }
 
