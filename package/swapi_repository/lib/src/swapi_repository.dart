@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:profile_repository/src/model/models.dart';
-import 'package:profile_repository/src/storage.dart';
-import 'package:profile_repository/src/swapi_api.dart';
+import 'package:swapi_repository/src/model/models.dart';
+// import 'package:swapi_repositoryy/src/storage.dart';
+import 'package:swapi_repository/src/swapi_api.dart';
 
 class SwapiRequestFailure implements Exception {}
 

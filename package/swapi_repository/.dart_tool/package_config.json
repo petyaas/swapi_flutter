@@ -566,13 +566,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "profile_repository",
+      "name": "swapi_repository",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-02-08T10:26:52.030723Z",
+  "generated": "2024-02-12T11:53:40.943137Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }
