@@ -11,27 +11,30 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
 
     on<HomeScreenEvent>((event, emit,) async{
-      print(event);
       await event.map(searchPeople: (event)async{
         emit(HomeScreenState.loading());
-        // try {
-        print(event);
-        List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
-        emit(HomeScreenState.loadedPeople(people: result));
+        try {
+          List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
+          emit(HomeScreenState.loadedPeople(people: result));
+        }catch(_){
+          rethrow;
+        }
 
       }, searchStarship: (event)async{
         emit(HomeScreenState.loading());
-        // try {
-        print(event);
-        StarshipModel result = await swapi.searchStarship(searchText: event.searchText);
-        emit(HomeScreenState.loadedStarship(starship: result));
+        try {
+          StarshipModel result = await swapi.searchStarship(searchText: event.searchText);
+          emit(HomeScreenState.loadedStarship(starship: result));
+        }catch(_){
+          rethrow;
+        }
 
       }, searchPlanet: (event)async{
         emit(HomeScreenState.loading());
-        // try {
-        print(event);
-        List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
-        emit(HomeScreenState.loadedPeople(people: result));
+        try {
+          List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
+          emit(HomeScreenState.loadedPeople(people: result));
+        }catch(_){}
 
       },
       );
