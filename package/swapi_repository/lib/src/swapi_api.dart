@@ -6,7 +6,7 @@ class SwApi {
   String endPoint = '';
   static BaseOptions options = BaseOptions(
       baseUrl: 'https://swapi.dev/api/',
-      responseType: ResponseType.plain,
+      responseType: ResponseType.json,
       connectTimeout: 30000,
       receiveTimeout: 30000,
       // ignore: missing_return
@@ -23,7 +23,7 @@ class SwApi {
   ) async {
     Response? _response;
     _response = await _getData(endPoint+'people?${search}',options:options);
-
+print(_response.data);
     return _response;
   }
   Future<Response> searchstarships(

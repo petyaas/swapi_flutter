@@ -6,40 +6,38 @@ part 'home_screen_state.dart';
 part 'home_screen_bloc.freezed.dart';
 
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
-  HomeScreenBloc() : super(const HomeScreenState.initial()) {
-    on<HomeScreenEvent>((event, emit) {
-      final SwapiRepository swapi=SwapiRepository();
-      event.map(
-        searchPeople: (searctText) async {
-          emit(HomeScreenState.loading());
-          try {
-            PeopleModel result = await swapi.searchPeople(searchText: searctText.searchText);
-            emit( HomeScreenState.loadedPeople(people: result));
-          } catch(_){
-            emit(HomeScreenState.error());
-          }
-        },
-        searchStarship: (searctText) async {
-          emit(HomeScreenState.loading());
-          try {
-            StarshipModel result = await swapi.searchStarship(searchText: searctText.searchText);
-            emit(HomeScreenState.loadedStarship(starship: result));
-          } catch(_){
-            emit(HomeScreenState.error());
-          }
-        },
-        searchPlanet: (searctText) async {
-          emit(HomeScreenState.loading());
-          try {
-            PlanetsModel result = await swapi.searchPlanet(searchText: searctText.searchText);
-            emit(HomeScreenState.loadedPlanet(planet: result));
-          } catch(_){
-            emit(HomeScreenState.error());
-          }
-        },
-      );
-      // TODO: implement event handler
-    });
+  SwapiRepository swapi = SwapiRepository();
+  HomeScreenBloc({required this.swapi}) : super(HomeScreenState.initial()) {
 
+
+    on<HomeScreenEvent>((event, emit,) async{
+      print(event);
+      await event.map(searchPeople: (event)async{
+        emit(HomeScreenState.loading());
+        // try {
+        print(event);
+        List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
+        emit(HomeScreenState.loadedPeople(people: result));
+
+      }, searchStarship: (event)async{
+        emit(HomeScreenState.loading());
+        // try {
+        print(event);
+        StarshipModel result = await swapi.searchStarship(searchText: event.searchText);
+        emit(HomeScreenState.loadedStarship(starship: result));
+
+      }, searchPlanet: (event)async{
+        emit(HomeScreenState.loading());
+        // try {
+        print(event);
+        List<PeopleModel> result = await swapi.searchPeople(searchText: event.searchText);
+        emit(HomeScreenState.loadedPeople(people: result));
+
+      },
+      );
+
+
+    });
   }
+
 }

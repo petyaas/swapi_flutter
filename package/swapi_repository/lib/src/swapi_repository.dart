@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:swapi_repository/src/model/models.dart';
@@ -13,7 +14,7 @@ class SwapiRepository {
   final SwApi _swApi = SwApi();
 
 
-  Future<PeopleModel> searchPeople({required String searchText}) async {
+  Future<List<PeopleModel>> searchPeople({required String searchText}) async {
     Response _response;
 
       _response = await _swApi.searchPeople(searchText);
@@ -21,14 +22,15 @@ class SwapiRepository {
         throw SwapiRequestFailure();
       }
 
-      if(_response.data['results']==null){
-        throw SwapiNotFoundFailure();
-      }
-      if(_response.data['results']==[]){
-        throw SwapiNotFoundFailure();
-      }
-
-        return PeopleModel.fromJson(_response.data['results']);
+      // if(_response.data['results']==null){
+      //   throw SwapiNotFoundFailure();
+      // }
+      // if(_response.data['results']==[]){
+      //   throw SwapiNotFoundFailure();
+      // }
+print('sdsa');
+        return List<PeopleModel>.from(_response.data['results'].map((model) => PeopleModel.fromJson(model)));
+        // return PeopleModel.fromJson(jsonDecode(_response.data['results']));
   }
 
   Future<StarshipModel> searchStarship({required String searchText}) async {

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swapi_flutter/home_screen/bloc/home_screen_bloc.dart';
+import 'package:swapi_flutter/home_screen/view/home_screen.dart';
+import 'package:swapi_repository/swapi_repository.dart';
 
 class SwapiView extends StatefulWidget {
   const SwapiView({super.key});
@@ -32,8 +36,9 @@ class _SwapiViewState extends State<SwapiView> {
         useMaterial3: true,
       ),
 
-      home: const Scaffold(
-        body: Center(child: Text('asas'),),
+      home: BlocProvider(
+        create: (context) => HomeScreenBloc(swapi:SwapiRepository() ),
+        child: const HomeScreen(),
       ),
     );
   }

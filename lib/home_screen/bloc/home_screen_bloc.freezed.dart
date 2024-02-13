@@ -136,9 +136,10 @@ class __$$SearchPeopleImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchPeopleImpl implements _SearchPeople {
-  const _$SearchPeopleImpl({required this.searchText});
+  const _$SearchPeopleImpl({this.searchText = ''});
 
   @override
+  @JsonKey()
   final String searchText;
 
   @override
@@ -234,8 +235,7 @@ class _$SearchPeopleImpl implements _SearchPeople {
 }
 
 abstract class _SearchPeople implements HomeScreenEvent {
-  const factory _SearchPeople({required final String searchText}) =
-      _$SearchPeopleImpl;
+  const factory _SearchPeople({final String searchText}) = _$SearchPeopleImpl;
 
   @override
   String get searchText;
@@ -542,7 +542,7 @@ mixin _$HomeScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -552,7 +552,7 @@ mixin _$HomeScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -562,7 +562,7 @@ mixin _$HomeScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -660,7 +660,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -673,7 +673,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -686,7 +686,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -786,7 +786,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -799,7 +799,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -812,7 +812,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -878,9 +878,7 @@ abstract class _$$LoadedPeopleImplCopyWith<$Res> {
           _$LoadedPeopleImpl value, $Res Function(_$LoadedPeopleImpl) then) =
       __$$LoadedPeopleImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PeopleModel people});
-
-  $PeopleModelCopyWith<$Res> get people;
+  $Res call({List<PeopleModel> people});
 }
 
 /// @nodoc
@@ -898,29 +896,28 @@ class __$$LoadedPeopleImplCopyWithImpl<$Res>
   }) {
     return _then(_$LoadedPeopleImpl(
       people: null == people
-          ? _value.people
+          ? _value._people
           : people // ignore: cast_nullable_to_non_nullable
-              as PeopleModel,
+              as List<PeopleModel>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PeopleModelCopyWith<$Res> get people {
-    return $PeopleModelCopyWith<$Res>(_value.people, (value) {
-      return _then(_value.copyWith(people: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$LoadedPeopleImpl implements _LoadedPeople {
-  const _$LoadedPeopleImpl({this.people = const PeopleModel()});
+  const _$LoadedPeopleImpl(
+      {final List<PeopleModel> people = const <PeopleModel>[]})
+      : _people = people;
 
+  final List<PeopleModel> _people;
   @override
   @JsonKey()
-  final PeopleModel people;
+  List<PeopleModel> get people {
+    if (_people is EqualUnmodifiableListView) return _people;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_people);
+  }
 
   @override
   String toString() {
@@ -932,11 +929,12 @@ class _$LoadedPeopleImpl implements _LoadedPeople {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedPeopleImpl &&
-            (identical(other.people, people) || other.people == people));
+            const DeepCollectionEquality().equals(other._people, _people));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, people);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_people));
 
   @JsonKey(ignore: true)
   @override
@@ -949,7 +947,7 @@ class _$LoadedPeopleImpl implements _LoadedPeople {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -962,7 +960,7 @@ class _$LoadedPeopleImpl implements _LoadedPeople {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -975,7 +973,7 @@ class _$LoadedPeopleImpl implements _LoadedPeople {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -1032,9 +1030,10 @@ class _$LoadedPeopleImpl implements _LoadedPeople {
 }
 
 abstract class _LoadedPeople implements HomeScreenState {
-  const factory _LoadedPeople({final PeopleModel people}) = _$LoadedPeopleImpl;
+  const factory _LoadedPeople({final List<PeopleModel> people}) =
+      _$LoadedPeopleImpl;
 
-  PeopleModel get people;
+  List<PeopleModel> get people;
   @JsonKey(ignore: true)
   _$$LoadedPeopleImplCopyWith<_$LoadedPeopleImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1119,7 +1118,7 @@ class _$LoadedStarshipImpl implements _LoadedStarship {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -1132,7 +1131,7 @@ class _$LoadedStarshipImpl implements _LoadedStarship {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -1145,7 +1144,7 @@ class _$LoadedStarshipImpl implements _LoadedStarship {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -1288,7 +1287,7 @@ class _$LoadedPlanetImpl implements _LoadedPlanet {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -1301,7 +1300,7 @@ class _$LoadedPlanetImpl implements _LoadedPlanet {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -1314,7 +1313,7 @@ class _$LoadedPlanetImpl implements _LoadedPlanet {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
@@ -1419,7 +1418,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(PeopleModel people) loadedPeople,
+    required TResult Function(List<PeopleModel> people) loadedPeople,
     required TResult Function(StarshipModel starship) loadedStarship,
     required TResult Function(PlanetsModel planet) loadedPlanet,
     required TResult Function() error,
@@ -1432,7 +1431,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(PeopleModel people)? loadedPeople,
+    TResult? Function(List<PeopleModel> people)? loadedPeople,
     TResult? Function(StarshipModel starship)? loadedStarship,
     TResult? Function(PlanetsModel planet)? loadedPlanet,
     TResult? Function()? error,
@@ -1445,7 +1444,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(PeopleModel people)? loadedPeople,
+    TResult Function(List<PeopleModel> people)? loadedPeople,
     TResult Function(StarshipModel starship)? loadedStarship,
     TResult Function(PlanetsModel planet)? loadedPlanet,
     TResult Function()? error,
