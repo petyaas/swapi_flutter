@@ -129,9 +129,9 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/perhatnurgeldiyev/.pub-cache/hosted/pub.dev/dio-4.0.6",
+      "rootUri": "file:///Users/perhatnurgeldiyev/.pub-cache/hosted/pub.dev/dio-5.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "ffi",
@@ -572,7 +572,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-02-12T11:53:40.943137Z",
+  "generated": "2024-02-14T10:48:43.361526Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

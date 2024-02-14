@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:dio/adapter.dart';
+// import 'package:dio/adapter.dart';
+// import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
 import 'dart:developer' as developer;
 class SwApi {
@@ -7,8 +8,8 @@ class SwApi {
   static BaseOptions options = BaseOptions(
       baseUrl: 'https://swapi.dev/api/',
       responseType: ResponseType.json,
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
+      connectTimeout: Duration(seconds: 30),
+      receiveTimeout: Duration(seconds: 30),
       // ignore: missing_return
       validateStatus: (code) {
         if (code! >= 200) {
@@ -40,10 +41,6 @@ print(_response.data);
 
 Future<Response> _getData(String endpoint, {String? token, BaseOptions? options,Map<String, dynamic>? queryParameters,CancelToken? cancelToken}) async {
   var dio = Dio(options);
-  (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-    return client;
-  };
 
   Response qwq;
     try {
